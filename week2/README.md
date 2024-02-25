@@ -1,6 +1,15 @@
 ## Week2
-[2주차 정리](https://www.notion.so/corcaai/f47f90c39ed8454db3e3822a7c2f4b39?pvs=4)
+[2주차 정리](https://www.notion.so/corcaai/f47f90c39ed8454db3e3822a7c2f4b39?pvs=4#9a90a3805f8e43e8bea8210085c202c9)
 
 ### Assignment
-
+- Decorator (Wrapper)
+  - 객체들을 새로운 행동들을 포함한 특수 래퍼 객체들에 넣어서 해당 객체들에 연결시키는 구조 패턴
+- Chain of Responsibility
+  - 핸들러의 체인을 따라 요청할 전달할 수 있게 해주는 행동 패턴
+  - 각 핸들러는 요청을 받으면 요청을 처리할지 아니면 체인의 다음 핸들러로 전달할지 결정
+- Singleton
+  - 클래스에 인스턴스가 하나만 있도록 하면서 이 인스턴스에 대한 전역 접근을 제공하는 생성 패턴
+- Proxy
+  - 다른 객체에 대한 대체할 수 있는 구조 패턴
+  - 원래 객체에 대한 접근을 제어하므로, 요청이 원래 객체에 전달되기 전 후에 무언가를 수행할 수 있도록 함
 ```

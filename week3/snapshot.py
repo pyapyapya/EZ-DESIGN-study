@@ -14,8 +14,8 @@ class CommandHistory:
     def __init__(self):
         self.snapshots: list[Snapshot] = []
 
-    def push(self, snapshot):
+    def push(self, snapshot: Snapshot):
         self.snapshots.append(snapshot)
 
     def pop(self) -> Snapshot:
-        return self.snapshots.pop()
+        return self.snapshots.pop() if self.snapshots else None

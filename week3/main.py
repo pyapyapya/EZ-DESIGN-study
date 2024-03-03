@@ -3,11 +3,13 @@ from curses import wrapper
 
 from editor import Editor
 from command import (
-    UndoCammand,
+    UndoCommand,
     QuitCommand,
     CalculateCommand,
     CommandHistory,
     DeleteCommand,
+    InsertCommand,
+    ErrorCommand,
 )
 
 stdscr = curses.initscr()
@@ -28,24 +30,18 @@ class Calculator:
                 if c == "q":
                     QuitCommand.execute()
                 elif c in ("KEY_BACKSPACE", "\b", "\x7f"):
-                    self.delete = DeleteCommand.execute(self.editor)
+                    DeleteCommand(self.editor, c, self.history).execute()
                     continue
                 elif c in ("KEY_ENTER", "\n", "\r"):
-                    CalculateCommand.execute(self.editor, self.history)
+                    CalculateCommand(self.editor, self.history).execute()
                 elif c == "u":
                     if len(self.history.snapshots) > 0:
-                        self.editor = UndoCammand.execute(self.editor, self.history)
+                        UndoCommand(self.editor, self.history).execute()
                 else:
-                    self.editor.strscr.addstr(self.editor.ny, self.editor.x, str(c))
-                    self.editor.strscr.move(self.editor.ny, self.editor.x + 1)
-                    self.editor.x += 1
-                    self.editor.text += c
+                    InsertCommand(self.editor, c, self.history).execute()
                 self.editor.strscr.refresh()
             except Exception as e:
-                self.editor.strscr.addstr(self.editor.ny, 0, self.ERR_MSG)
-                self.editor.x = len(self.ERR_MSG)
-                self.editor.strscr.move(self.editor.ny, self.editor.x)
-                self.editor.strscr.refresh()
+                ErrorCommand(self.editor, self.history).execute()
                 continue
 
     def __add_manual(self):
@@ -61,6 +57,5 @@ def main(stdscr):
     editor = Editor(stdscr)
     app = Calculator(editor, history)
     app.run()
-
 
 wrapper(main)

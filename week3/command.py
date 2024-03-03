@@ -1,6 +1,6 @@
 from abc import abstractmethod
 
-from snapshot import Snapshot, CommandHistory
+from snapshot import CommandHistory
 from editor import Editor
 
 
